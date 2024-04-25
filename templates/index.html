@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>A1 Trading</h1>
+
+      <h2>Latest Scores</h2>
+
+      <table>
+        <tr>
+          <th>Key</th>
+          {% for indicator in all_data_names %}
+
+          <th>{{ indicator }}</th>
+
+          {% endfor %}
+          <th>Value</th>
+        </tr>
+        {% for key, value in latest_scores.items() %}
+        <tr
+          class="{% if value > 8 %} very-bullish {% elif value > 4 %} bullish {% elif value < -8 %} very-bearish {% elif value < -4 %} bearish {% else %} neutral {% endif %}"
+        >
+          <td>{{ key }}</td>
+
+          {% for indicator in details_scores[key] %}
+
+          <td>{{ indicator }}</td>
+
+          {% endfor %}
+
+          <td>{{ value }}</td>
+          <td>
+            {% if value > 8 %} Very Bullish {% elif value > 4 %} Bullish {% elif
+            value < -8 %} Very Bearish {% elif value < -4 %} Bearish {% else %}
+            Neutral {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </body>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Arial", sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      line-height: 1.6;
+      margin-top: 20px;
+    }
+
+    .container {
+      width: 80%;
+      margin: auto;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    th,
+    td {
+      border-bottom: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    tr.very-bullish {
+      background-color: rgba(
+        76,
+        175,
+        80,
+        0.5
+      ); /* Green with 50% transparency */
+    }
+    tr.bullish {
+      background-color: rgba(
+        139,
+        195,
+        74,
+        0.5
+      ); /* Light Green with 50% transparency */
+    }
+
+    tr.very-bearish {
+      background-color: rgba(244, 67, 54, 0.5); /* Red with 50% transparency */
+    }
+    tr.bearish {
+      background-color: rgba(
+        229,
+        115,
+        115,
+        0.5
+      ); /* Light Red with 50% transparency */
+    }
+
+    tr.neutral {
+      background-color: #f9f9f9;
+    }
+  </style>
+</html>
